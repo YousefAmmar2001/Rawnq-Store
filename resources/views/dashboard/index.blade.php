@@ -81,20 +81,15 @@
 @endsection
 
 
-{{-- @extends('cms.parent')
+{{-- @extends('layouts.dashboard')
 
 @section('title', '')
-@section('page-large-name', '')
-@section('page-small-name', '')
-
-@section('styles')
-
+@section('section-title', '')
+@section('breadcrumb')
+    @parent
+    <li class="breadcrumb-item active">Starter Page</li>
 @endsection
 
 @section('content')
-
-@endsection
-
-@section('scripts')
 
 @endsection --}}

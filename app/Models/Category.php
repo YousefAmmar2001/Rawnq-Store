@@ -9,6 +9,8 @@ class Category extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['parent_id', 'name', 'slug', 'description', 'image', 'status'];
+
     protected $connection = 'mysql';
     protected $table = 'categories';
     protected $primaryKey = 'id';
