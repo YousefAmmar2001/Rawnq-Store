@@ -1,4 +1,11 @@
-@props(['label', 'name', 'options', 'selected', 'textField' => 'name', 'valueField' => 'id'])
+@props([
+    'label' => false,
+    'name',
+    'options' => [],
+    'selected' => false,
+    'textField' => 'name',
+    'valueField' => 'id',
+])
 
 <div class="form-group">
     <label>{{ $label }}</label>

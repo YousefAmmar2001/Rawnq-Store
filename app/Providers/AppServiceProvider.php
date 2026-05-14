@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -31,5 +32,7 @@ class AppServiceProvider extends ServiceProvider
             },
             'This :attribute is prohibited!'
         );
+
+        Paginator::useBootstrap();
     }
 }

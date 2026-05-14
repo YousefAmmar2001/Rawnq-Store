@@ -8,6 +8,12 @@
     <li class="breadcrumb-item active">Index</li>
 @endsection
 
+@push('styles')
+    <!-- Select2 -->
+    <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css') }}">
+@endpush
+
 @section('content')
     <section class="content">
         <div class="container-fluid">
@@ -20,6 +26,36 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            <form action="{{ URL::current() }}" method="get" class="mb-4">
+                                <div class="d-flex align-items-center" style="gap: 10px;">
+                                    <div style="flex: 2;">
+                                        <input type="text" name="name" value="{{ request('name') }}"
+                                            placeholder="Search by name..." class="form-control">
+                                    </div>
+                                    <div style="flex: 1; min-width: 150px;">
+                                        <select name="status" class="form-control statuses">
+                                            <option value="">
+                                                All Status
+                                            </option>
+                                            <option value="active" @selected(request('status') == 'active')>
+                                                Active
+                                            </option>
+                                            <option value="archived" @selected(request('status') == 'archived')>
+                                                Archived
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="d-flex" style="gap: 5px;">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-search"></i> Filter
+                                        </button>
+                                        <a href="{{ URL::current() }}" class="btn btn-outline-secondary">
+                                            <i class="fas fa-sync"></i> Reset
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
@@ -27,6 +63,7 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Parent</th>
+                                        <th>Status</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
                                         <th>Settings</th>
@@ -46,6 +83,7 @@
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
                                             <td>{{ $category->parent_id }}</td>
+                                            <td>{{ $category->status }}</td>
                                             <td>{{ $category->created_at }}</td>
                                             <td>{{ $category->updated_at }}</td>
                                             <td>
@@ -84,6 +122,9 @@
                                 </tbody>
                             </table>
                         </div>
+                        <div class="card-footer clearfix">
+                            {{ $categories->withQueryString()->links() }}
+                        </div>
                     </div>
                     <!-- /.card -->
                 </div>
@@ -92,3 +133,13 @@
         </div><!-- /.container-fluid -->
     </section>
 @endsection
+
+@push('scripts')
+    <!-- Select2 -->
+    <script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+    <script>
+        $('.statuses').select2({
+            theme: 'bootstrap4',
+        })
+    </script>
+@endpush
