@@ -82,7 +82,7 @@
                                             </td>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
-                                            <td>{{ $category->parent_id }}</td>
+                                            <td>{{ $category->parent_name }}</td>
                                             <td>{{ $category->status }}</td>
                                             <td>{{ $category->created_at }}</td>
                                             <td>{{ $category->updated_at }}</td>
