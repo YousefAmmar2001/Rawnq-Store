@@ -79,17 +79,3 @@
     </div>
     <!-- /.content -->
 @endsection
-
-
-{{-- @extends('layouts.dashboard')
-
-@section('title', '')
-@section('section-title', '')
-@section('breadcrumb')
-    @parent
-    <li class="breadcrumb-item active">Starter Page</li>
-@endsection
-
-@section('content')
-
-@endsection --}}

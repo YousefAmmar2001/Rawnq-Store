@@ -18,6 +18,12 @@ return [
                 'title' => 'Create',
                 'active' => 'dashboard.categories.create',
             ],
+            [
+                'icon' => 'fas fa-trash-alt',
+                'route' => 'dashboard.categories.trash',
+                'title' => 'Trash',
+                'active' => 'dashboard.categories.trash',
+            ],
         ]
     ],
     [
