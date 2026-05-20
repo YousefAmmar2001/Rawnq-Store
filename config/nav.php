@@ -33,13 +33,13 @@ return [
         'items' => [
             [
                 'icon' => 'fas fa-list',
-                'route' => 'dashboard.categories.index',
+                'route' => 'dashboard.products.index',
                 'title' => 'Index',
                 'active' => 'dashboard.products.index',
             ],
             [
                 'icon' => 'fas fa-plus-square',
-                'route' => 'dashboard.categories.create',
+                'route' => 'dashboard.products.create',
                 'title' => 'Create',
                 'active' => 'dashboard.products.create',
             ],

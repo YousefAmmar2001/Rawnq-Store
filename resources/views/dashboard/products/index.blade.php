@@ -1,11 +1,11 @@
 @extends('layouts.dashboard')
 
-@section('title', 'Trashed Categories')
-@section('section-title', 'Trashed Categories')
+@section('title', 'Products')
+@section('section-title', 'Products')
 @section('breadcrumb')
     @parent
-    <li class="breadcrumb-item active">Categories</li>
-    <li class="breadcrumb-item active">Trash</li>
+    <li class="breadcrumb-item active">Products</li>
+    <li class="breadcrumb-item active">Index</li>
 @endsection
 
 @push('styles')
@@ -22,7 +22,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Categories Table</h3>
+                            <h3 class="card-title">Products Table</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -62,38 +62,40 @@
                                         <th>Image</th>
                                         <th>#</th>
                                         <th>Name</th>
+                                        <th>Category</th>
+                                        <th>Store</th>
                                         <th>Status</th>
-                                        <th>Deleted At</th>
+                                        <th>Created At</th>
+                                        <th>Updated At</th>
                                         <th>Settings</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse ($categories as $category)
+                                    @forelse ($products as $product)
                                         <tr>
                                             <td>
-                                                @if ($category->image)
-                                                    <img src="{{ Storage::url($category->image) }}"
-                                                        alt="{{ $category->name }}" height="80">
+                                                @if ($product->image)
+                                                    <img src="{{ Storage::url($product->image) }}"
+                                                        alt="{{ $product->name }}" height="80">
                                                 @else
                                                     <span class="text-muted">No image</span>
                                                 @endif
                                             </td>
-                                            <td>{{ $category->id }}</td>
-                                            <td>{{ $category->name }}</td>
-                                            <td>{{ $category->status }}</td>
-                                            <td>{{ $category->deleted_at }}</td>
+                                            <td>{{ $product->id }}</td>
+                                            <td>{{ $product->name }}</td>
+                                            <td>{{ $product->category_id }}</td>
+                                            <td>{{ $product->store_id }}</td>
+                                            <td>{{ $product->status }}</td>
+                                            <td>{{ $product->created_at }}</td>
+                                            <td>{{ $product->updated_at }}</td>
                                             <td>
                                                 <div class="btn-group">
+                                                    <a href="{{ route('dashboard.products.edit', $product->id) }}"
+                                                        class="btn btn-info">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
                                                     <form method="POST"
-                                                        action="{{ route('dashboard.categories.restore', $category->id) }}">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button type="submit" class="btn btn-warning">
-                                                            <i class="fas fa-trash-restore"></i>
-                                                        </button>
-                                                    </form>
-                                                    <form method="POST"
-                                                        action="{{ route('dashboard.categories.force-delete', $category->id) }}">
+                                                        action="{{ route('dashboard.products.destroy', $product->id) }}">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit" class="btn btn-danger">
@@ -105,10 +107,16 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="6" class="text-center">
+                                            <td colspan="9" class="text-center">
                                                 <div class="p-4">
                                                     <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
-                                                    <h5 class="text-muted">No categories found!</h5>
+                                                    <h5 class="text-muted">No products found!</h5>
+                                                    <p class="text-secondary small">Try adding some products to see them
+                                                        here.</p>
+                                                    <a href="{{ route('dashboard.products.create') }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        <i class="fas fa-plus"></i> Add New Product
+                                                    </a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -117,7 +125,7 @@
                             </table>
                         </div>
                         <div class="card-footer clearfix">
-                            {{ $categories->withQueryString()->links() }}
+                            {{ $products->withQueryString()->links() }}
                         </div>
                     </div>
                     <!-- /.card -->
