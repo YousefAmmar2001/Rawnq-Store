@@ -19,14 +19,11 @@ class CategoryController extends Controller
     public function index()
     {
         $request = request();
-        $categories = Category::leftJoin('categories as parents', 'parents.id', '=', 'categories.parent_id')
-            ->select([
-                'categories.*',
-                'parents.name as parent_name',
-            ])
+        $categories = Category::with('parent')
+            ->withCount('products')
             ->filter($request->query())
             ->orderBy('categories.name')
-            ->paginate(10);
+            ->paginate();
         return view('dashboard.categories.index', compact('categories'));
     }
 
@@ -68,9 +65,10 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Category $category)
     {
-        //
+        $products = $category->products()->with('store')->latest()->paginate(10);
+        return view('dashboard.categories.show', compact('category'));
     }
 
     /**

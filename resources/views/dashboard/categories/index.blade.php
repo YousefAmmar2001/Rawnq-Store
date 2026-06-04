@@ -63,6 +63,7 @@
                                         <th>#</th>
                                         <th>Name</th>
                                         <th>Parent</th>
+                                        <th>products #</th>
                                         <th>Status</th>
                                         <th>Created At</th>
                                         <th>Updated At</th>
@@ -82,12 +83,17 @@
                                             </td>
                                             <td>{{ $category->id }}</td>
                                             <td>{{ $category->name }}</td>
-                                            <td>{{ $category->parent_name }}</td>
+                                            <td>{{ $category->parent->name }}</td>
+                                            <td>{{ $category->products_count }}</td>
                                             <td>{{ $category->status }}</td>
                                             <td>{{ $category->created_at }}</td>
                                             <td>{{ $category->updated_at }}</td>
                                             <td>
                                                 <div class="btn-group">
+                                                    <a href="{{ route('dashboard.categories.show', $category->id) }}"
+                                                        class="btn btn-warning">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
                                                     <a href="{{ route('dashboard.categories.edit', $category->id) }}"
                                                         class="btn btn-info">
                                                         <i class="fas fa-edit"></i>
@@ -105,7 +111,7 @@
                                         </tr>
                                     @empty
                                         <tr>
-                                            <td colspan="7" class="text-center">
+                                            <td colspan="9" class="text-center">
                                                 <div class="p-4">
                                                     <i class="fas fa-folder-open fa-3x text-muted mb-3"></i>
                                                     <h5 class="text-muted">No categories found!</h5>
